@@ -17,7 +17,7 @@ if (mysqli_connect_errno()) {
 }
 
 if (isset($_COOKIE["burden_user_rememberme"])) {
-    $hash = $_COOKIE["burden_user_rememberme"];
+    $hash = htmlentities(mysqli_real_escape_string($_COOKIE["burden_user_rememberme"]));
     $getuser = mysqli_query($con, "SELECT `id`, `hash` FROM `users` WHERE `hash` = \"$hash\"");
     if (mysqli_num_rows($getuser) == 0) {
         header("Location: logout.php");
